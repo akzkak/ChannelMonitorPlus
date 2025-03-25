@@ -1,0 +1,64 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\..\..\FrameXML\UI.xsd">
+    
+    <!-- Our main addon frame -->
+    <Frame name="ChannelMonitorPlusFrame" parent="UIParent" movable="true" enableMouse="true" resizable="true" frameStrata="HIGH">
+        <!-- Minimum/maximum sizes for the resizable frame -->
+        <ResizeBounds>
+            <minResize x="250" y="120" />
+            <maxResize x="700" y="360" />
+        </ResizeBounds>
+
+        <Anchors>
+            <Anchor point="CENTER" />
+        </Anchors>
+
+        <!-- An example backdrop (optional) -->
+        <Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border" edgeSize="16">
+            <BackgroundInsets left="4" right="4" top="4" bottom="4" />
+            <Color r="0" g="0" b="0" a="0.4" />
+        </Backdrop>
+        
+        <Frames>
+            <!-- The resize button in the lower right corner -->
+            <Button name="$parent_ResizeHandle" inherits="UIPanelButtonTemplate">
+                <Size x="16" y="16" />
+                <Anchors>
+                    <Anchor point="BOTTOMRIGHT" relativeTo="$parent" relativePoint="BOTTOMRIGHT" />
+                </Anchors>
+                <!-- Normal, Pushed, and Highlight textures. 
+                     Ensure the .tga files exist at the specified paths. -->
+                <NormalTexture file="Interface\AddOns\ChannelMonitorPlus\images\UI-ChatIM-SizeGrabber-Up.tga" />
+                <PushedTexture file="Interface\AddOns\ChannelMonitorPlus\images\UI-ChatIM-SizeGrabber-Down.tga" />
+                <HighlightTexture file="Interface\AddOns\ChannelMonitorPlus\images\UI-ChatIM-SizeGrabber-Highlight.tga" alphaMode="ADD" />
+                
+                <Scripts>
+                    <OnMouseDown>
+                        if arg1 == "LeftButton" then
+                            this:GetParent():StartSizing("BOTTOMRIGHT")
+                        end
+                    </OnMouseDown>
+                    <OnMouseUp>
+                        this:GetParent():StopMovingOrSizing()
+                        -- If your Lua uses channel_monitor:save_frame(), call it here:
+                        if channel_monitor and channel_monitor.save_frame then
+                            channel_monitor:save_frame()
+                        end
+                    </OnMouseUp>
+                </Scripts>
+            </Button>
+        </Frames>
+        
+        <!-- Optionally, you can put OnLoad to store a reference to the frame in your addon -->
+        <Scripts>
+            <OnLoad>
+                -- Example usage:
+                -- Register this frame with the addon if needed
+                if channel_monitor then
+                    channel_monitor.main_frame = this
+                end
+            </OnLoad>
+        </Scripts>
+    </Frame>
+</Ui>

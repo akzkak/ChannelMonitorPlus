@@ -1,0 +1,9 @@
+## Interface: 11200
+## Title: ChannelMonitorPlus
+## Author: shirsig, Paduk
+## Notes: Enhanced chat monitor with keyword filtering, custom channels, and right-click invite.
+## Version: 1.1
+## SavedVariablesPerCharacter: ChannelMonitorPlus_x, ChannelMonitorPlus_y, ChannelMonitorPlus_dx, ChannelMonitorPlus_dy, ChannelMonitorPlus_on, ChannelMonitorPlus_filter, ChannelMonitorPlus_ignore_filter, ChannelMonitorPlus_opacity, ChannelMonitorPlus_audio, ChannelMonitorPlus_channels
+
+ChannelMonitorPlus.xml
+ChannelMonitorPlus.lua
