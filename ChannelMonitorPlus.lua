@@ -590,43 +590,48 @@ function channel_monitor:ADDON_LOADED()
 
     -- Set up slash commands
     SLASH_CHANNEL_MONITOR1, SLASH_CHANNEL_MONITOR2 = '/ChannelMonitorPlus', '/cmp'
-    function SlashCmdList.CHANNEL_MONITOR(arg)
-        local cmd, value = string.match(arg, "^(%S+)%s*(%S*)$")
+	function SlashCmdList.CHANNEL_MONITOR(arg)
+		local cmd, value = "", ""
+		
+		-- Use string.find with captures instead of string.match
+		local _, _, cmd_part, value_part = string.find(arg, "^(%S+)%s*(%S*)$")
+		if cmd_part then cmd = cmd_part end
+		if value_part then value = value_part end
 
-        if cmd == "on" then
-            ChannelMonitorPlus_on = true
-            channel_monitor:registerChatEvents()
-            channel_monitor.main_frame:Show()
-            DEFAULT_CHAT_FRAME:AddMessage("Channel Monitor Plus ON")
+		if cmd == "on" then
+			ChannelMonitorPlus_on = true
+			channel_monitor:registerChatEvents()
+			channel_monitor.main_frame:Show()
+			DEFAULT_CHAT_FRAME:AddMessage("Channel Monitor Plus ON")
 
-        elseif cmd == "off" then
-            ChannelMonitorPlus_on = false
-            channel_monitor:unregisterChatEvents()
-            channel_monitor.main_frame:Hide()
-            DEFAULT_CHAT_FRAME:AddMessage("Channel Monitor Plus OFF")
+		elseif cmd == "off" then
+			ChannelMonitorPlus_on = false
+			channel_monitor:unregisterChatEvents()
+			channel_monitor.main_frame:Hide()
+			DEFAULT_CHAT_FRAME:AddMessage("Channel Monitor Plus OFF")
 
-        elseif cmd == "audio" then
-            -- Toggle audio
-            ChannelMonitorPlus_audio = not ChannelMonitorPlus_audio
-            DEFAULT_CHAT_FRAME:AddMessage("Channel Monitor Plus sound is now "..
-              (ChannelMonitorPlus_audio and "ON" or "OFF"))
+		elseif cmd == "audio" then
+			-- Toggle audio
+			ChannelMonitorPlus_audio = not ChannelMonitorPlus_audio
+			DEFAULT_CHAT_FRAME:AddMessage("Channel Monitor Plus sound is now "..
+			  (ChannelMonitorPlus_audio and "ON" or "OFF"))
 
-        elseif cmd == "opacity" then
-            local newValue = tonumber(value)
-            if newValue and newValue >= 1 and newValue <= 100 then
-                ChannelMonitorPlus_opacity = newValue / 100
-                channel_monitor.main_frame:SetBackdropColor(0, 0, 0, ChannelMonitorPlus_opacity)
-                DEFAULT_CHAT_FRAME:AddMessage("Channel Monitor Plus opacity set to "..value.."%")
-            else
-                DEFAULT_CHAT_FRAME:AddMessage("Usage: /cmp opacity 1-100")
-            end
+		elseif cmd == "opacity" then
+			local newValue = tonumber(value)
+			if newValue and newValue >= 1 and newValue <= 100 then
+				ChannelMonitorPlus_opacity = newValue / 100
+				channel_monitor.main_frame:SetBackdropColor(0, 0, 0, ChannelMonitorPlus_opacity)
+				DEFAULT_CHAT_FRAME:AddMessage("Channel Monitor Plus opacity set to "..value.."%")
+			else
+				DEFAULT_CHAT_FRAME:AddMessage("Usage: /cmp opacity 1-100")
+			end
 
-        else
-            DEFAULT_CHAT_FRAME:AddMessage(
-                "Usage: /cmp on | off | audio | opacity <1-100>"
-            )
-        end
-    end
+		else
+			DEFAULT_CHAT_FRAME:AddMessage(
+				"Usage: /cmp on | off | audio | opacity <1-100>"
+			)
+		end
+	end
 
     -- Either register chat events if "on", or not if "off"
     if ChannelMonitorPlus_on then
