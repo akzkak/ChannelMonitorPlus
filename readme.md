@@ -2,6 +2,8 @@
 
 **An enhanced WoW Vanilla (1.12) addon originally by [shirsig](https://github.com/shirsig/channel_monitor) with additional features and improvements.**
 
+![ChannelMonitorPlus Screenshot](https://i.postimg.cc/Jn7DBgM5/Wo-W-26-03-25-2.png)
+
 ## Features
 
 - **Keyword Filtering**: Monitor chat for specific keywords (comma-separated).
