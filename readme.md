@@ -2,7 +2,8 @@
 
 **An enhanced WoW Vanilla (1.12) addon originally by [shirsig](https://github.com/shirsig/channel_monitor) with additional features and improvements.**
 
-![ChannelMonitorPlus Screenshot](https://i.postimg.cc/Jn7DBgM5/Wo-W-26-03-25-2.png)
+![WoW_26-03-25 (2)](https://github.com/user-attachments/assets/ed95ac52-f46a-4f4e-92e5-ea607dfe769f)
+
 
 ## Features
 
